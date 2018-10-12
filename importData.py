@@ -9,7 +9,14 @@ def find_data():
     db = pymysql.connect(host="localhost",user="root",password="123456",db="stock",port=3306)
     cur = db.cursor()
     try:
-        sql = "select * from finally_data"
+        sql = """select `stock_code`, `stock_name`, `date`, `opening_price`, `top_price`, `floor_price`, `closing_price`, 
+        `change_range`, `turnover`, `average_price`, `turnover_rate`, `amplitude`, case `is_harden` when 'Y' then 1 else 0 end , 
+        case `is_always_harden` when 'Y' then 1 else 0 end , 
+        `morrow_opening_price`,`morrow_top_price`, `morrow_floor_price`, `morrow_closing_price`, `morrow_change_range`, `morrow_turnover`,
+         `morrow_average_price`,`morrow_turnover_rate`,`morrow_amplitude`,case `morrow_is_harden` when 'Y' then 1 else 0 end ,
+          case `morrow_is_always_harden` when 'Y' then 1 else 0 end ,
+          `morrow_open_price_change` from finally_data WHERE (is_always_harden != 'Y' OR morrow_is_always_harden != 'Y')
+          AND `morrow_opening_price` is not null"""
         db.commit()
         cur.execute(sql)
         data_tuple = cur.fetchall()

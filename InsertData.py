@@ -1,7 +1,9 @@
 import pymysql
 import pandas as pd
 import  traceback
-#读取CSV文件，返回list
+
+
+# 读取CSV文件，返回list
 def read_excel_by_pandas(url):
     stock_data = []
     each_stock_data = []
@@ -28,7 +30,9 @@ def read_excel_by_pandas(url):
             else:
                 each_stock_data.append("%.8f" % float(value))
     return stock_data
-#将股票数据插入MySQL数据库
+
+
+# 将股票数据插入MySQL数据库
 def insert_to_mysql(list):
     db = pymysql.connect(host="localhost",user="root",password="123456",db="stock",port=3306)
     cur = db.cursor()
