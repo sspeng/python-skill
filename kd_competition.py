@@ -2,6 +2,8 @@ import pandas as pd
 import time
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import importData
+
 
 # 获取每一列的类别个数
 def get_column_type_num(date_frame):
@@ -33,12 +35,12 @@ def get_column_max_and_min(date_frame):
     print("------------------------------------")
     max_value = 0
     min_value = 0
-    for time in time_list:
-        if time > max_value:
-            max_value = time
-        if min_value == 0 or time < min_value:
-            min_value = time
-    print("max:",max_value,"min:",min_value,"计算所得：",(max_value-min_value)/24/3600)
+    for tm in time_list:
+        if tm > max_value:
+            max_value = tm
+        if min_value == 0 or tm < min_value:
+            min_value = tm
+    print("max:", max_value, "min:", min_value,"计算所得：", (max_value-min_value)/24/3600)
 
 
 # 获取提取时间特征数据
@@ -104,9 +106,30 @@ def draw_line_chart():
     plt.show()  # 显示图表
 
 
+# 获取提取某列各分类关于点击率的数据
+def get_col_character_data(date_frame, column_name):
+    data_list = date_frame[column_name]
+    data_dict = {}
+    return_value = []
+    for i in range(len(data_list)):
+        data_string = data_list[i]
+        if data_string in data_dict:
+            data_dict[data_string][0] += 1
+            if date_frame["click"][i] == 1:
+                data_dict[data_string][1] += 1
+        else:
+            data_dict[data_string] = [1, 1 if date_frame["click"][i] == 1 else 0]
+    for key, val in data_dict.items():
+        return_value.append([key, val[0], val[1] / val[0] * 100])
+    return return_value
+
+
 path = "D:\\test.txt"
 path = "D:\\round1_iflyad_train.txt"
 data = pd.read_csv(path,delimiter="\t")
-get_column_each_type_num(data,"osv")
-
+print(data.columns)  # 打印标题
+col_name = "adid"
+export_data = get_col_character_data(data, col_name)
+export_data = sorted(export_data, key=lambda da: str(da[0]))
+importData.data_to_csv("D:\\胡\\桌面文件\\算法比赛题\\"+col_name+".txt", export_data, [col_name, "样本数", "点击率"])
 

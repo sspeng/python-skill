@@ -2,9 +2,8 @@ import pymysql
 import traceback
 import pandas as pd
 
-"""
-从数据库中查找数据
-"""
+
+# 从数据库中查找数据
 def find_data():
     db = pymysql.connect(host="localhost",user="root",password="123456",db="stock",port=3306)
     cur = db.cursor()
@@ -28,12 +27,12 @@ def find_data():
     finally:
         cur.close()
         db.close()
-"""
-将数据导出为csv格式
-"""
+
+
+# 将数据导出为csv格式
 def data_to_csv(file, data, columns):
     data = list(data)
     columns = list(columns)
     file_data = pd.DataFrame(data, index=range(len(data)), columns=columns)
-    file_data.to_csv(file,index=False,encoding="GBK")
+    file_data.to_csv(file,index=False,encoding="utf-8",sep="\t")
     print("导出成功")
