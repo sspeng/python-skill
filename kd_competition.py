@@ -126,10 +126,10 @@ def get_col_character_data(date_frame, column_name):
 
 path = "D:\\test.txt"
 path = "D:\\round1_iflyad_train.txt"
-data = pd.read_csv(path,delimiter="\t")
+data = pd.read_csv(path, delimiter="\t")
 print(data.columns)  # 打印标题
-col_name = "adid"
+col_name = "creative_id"
 export_data = get_col_character_data(data, col_name)
-export_data = sorted(export_data, key=lambda da: str(da[0]))
+# export_data = sorted(export_data, key=lambda da: str(da[0]))
 importData.data_to_csv("D:\\胡\\桌面文件\\算法比赛题\\"+col_name+".txt", export_data, [col_name, "样本数", "点击率"])
 
