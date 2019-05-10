@@ -43,5 +43,7 @@ def search_data():
     finally:
         cur.close()
         db.close()
-#执行方法
+
+
+# 执行方法
 search_data()

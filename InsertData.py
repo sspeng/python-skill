@@ -1,6 +1,6 @@
 import pymysql
 import pandas as pd
-import  traceback
+import traceback
 
 
 # 读取CSV文件，返回list

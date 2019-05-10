@@ -29,10 +29,16 @@ def find_data():
         db.close()
 
 
-# 将数据导出为csv格式
 def data_to_csv(file, data, columns):
+    """
+    将数据导出为csv格式
+    :param file: 导出的文件地址
+    :param data: 文件内容
+    :param columns: 文件标题
+    :return:
+    """
     data = list(data)
     columns = list(columns)
     file_data = pd.DataFrame(data, index=range(len(data)), columns=columns)
-    file_data.to_csv(file,index=False,encoding="utf-8",sep="\t")
+    file_data.to_csv(file, index=False, encoding="utf-8", sep="\t")
     print("导出成功")
