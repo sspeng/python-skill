@@ -1,22 +1,12 @@
 import math
 import numpy as np
-import tensorflow as tf
+import pandas as pd
+from numpy import nan as NaN
+import time
+import datetime
+import re
 
-def count_down(number):
-    print("start")
-    while number>0:
-
-        number-=1
-        yield number + 10
-
-res = count_down(3)
-while 1:
-    c = next(res)
-    if c is None:
-        break
-    print(c)
-    print("******************************")
-
-print("************************************************************")
-print("************************************************************")
-
+content = 'Citizen wang , always fall in love with neighbour，WANG'
+rr = re.compile(r'wan\w', re.I) # 不区分大小写
+print(rr)
+print(type(rr))

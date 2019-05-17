@@ -1,4 +1,4 @@
-from InsertData import *
+from stock.InsertData import *
 
 total_num = 0
 for i in range(1,10):

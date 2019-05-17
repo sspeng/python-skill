@@ -1,4 +1,4 @@
-import ChangeStrFile as cs
+from stock import ChangeStrFile as cs
 
 path = "D:\\BaiduNetdiskDownload\\Udacity深度学习\\01.神经网络"
 for file_path in cs.findFileByExtension(path):
