@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 from deepLearning.session_two.tf_untils import *
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' #只显示warning和error
 
 
 np.random.seed(1)
@@ -111,6 +111,8 @@ def forward_propagation(X, parameters):
     return Z3
 
 def compute_cost(Z3, Y):
+    # tf.transpose(a, perm = None, name = 'transpose')
+    # 将a进行转置，并且根据perm参数重新排列输出维度。这是对数据的维度的进行操作的形式。
     logits = tf.transpose(Z3)
     labels = tf.transpose(Y)
 
@@ -161,3 +163,5 @@ def model(X_train, Y_train, X_test, Y_test, learning_rate=0.0001, num_epochs=150
         print("Train Accuracy:", accuracy.eval({X:X_test, Y:Y_test}))
 
         return parameters
+
+predict()

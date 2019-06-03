@@ -44,25 +44,43 @@ def singleton(cls):
         return instances[cls]
     return get_instance
 
-def draw_line_chart():
+def use_matlab():
     """
-    matlab画图
+    使用matplotlib画图
     :return:
     """
-    mpl.rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体 SimHei为黑体
-    mpl.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
-    # plt.figure(figsize=(15, 15))  # 创建绘图对象
-    plt.subplot(221)   # 构建2*2的方格，占据第一个位置
-    x_value = range(24)
-    y_value = [random.randint(0,10) for i in range(24)]
-    plt.plot(x_value, y_value, marker='o')  # 在当前绘图对象进行绘图（两个参数是x,y轴的数据）,marker显示点
-    # for a, b in zip(x_value, y_value):  # 增加点坐标数据
-    #     plt.text(a, b, (a, b), ha='center', va='bottom', fontsize=10)
-    plt.title("图像一")  # 标题
-    plt.xlabel("hours")  # 横坐标标签
-    plt.ylabel("total_num")  # 纵坐标标签
-    # plt.savefig("time_feature.png")  # 保存图片
-    plt.show()  # 显示图表
+    def draw_line():
+        """
+        画折线图
+        :return:
+        """
+        mpl.rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体 SimHei为黑体
+        mpl.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+        # plt.figure(figsize=(15, 15))  # 创建绘图对象
+        plt.subplot(221)   # 构建2*2的方格，占据第一个位置
+        x_value = range(24)
+        y_value = [random.randint(0,10) for i in range(24)]
+        plt.plot(x_value, y_value, marker='o')  # 在当前绘图对象进行绘图（两个参数是x,y轴的数据）,marker显示点
+        # for a, b in zip(x_value, y_value):  # 增加点坐标数据
+        #     plt.text(a, b, (a, b), ha='center', va='bottom', fontsize=10)
+        plt.title("图像一")  # 标题
+        plt.xlabel("hours")  # 横坐标标签
+        plt.ylabel("total_num")  # 纵坐标标签
+        # plt.savefig("time_feature.png")  # 保存图片
+        plt.show()  # 显示图表
+    def draw_rectangle():
+        """
+        画矩形框
+        :return:
+        """
+        fig = plt.figure()  # 创建图
+        ax = fig.add_subplot(111)  # 创建子图
+        # ax = plt.gca() # 获得当前整张图表的坐标对象
+        ax.invert_yaxis()  # y轴反向
+        ax.xaxis.set_ticks_position('top')  # 将x轴的位置设置在顶部
+        rect = plt.Rectangle((0.1, 0.1), 0.5, 0.3, fill=False) # 靠近原点的点坐标，长，宽
+        ax.add_patch(rect)
+        plt.show()
 
 def data_to_csv():
     """
@@ -99,3 +117,4 @@ def the_iterator():
             wrfile.write(chuck)
             wrfile.close()
         f.close()
+
